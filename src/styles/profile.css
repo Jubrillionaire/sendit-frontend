@@ -1,0 +1,36 @@
+.profile{
+    padding-top: 5%;
+     width: 80%;
+    margin: 0 auto;
+     padding-bottom: 3%;
+}
+ .card{
+   margin-left: 10%;
+} 
+
+
+.all{
+   padding-top: 10%;
+}
+
+/*  
+@media screen and (max-width: 1240px){
+  
+ }
+
+ @media screen and (max-width: 767px){
+   
+ }
+
+ @media screen and (max-width: 550px){
+   .profile{
+       width: 80%;
+  }
+ } */
+
+
+
+
+
+
+
