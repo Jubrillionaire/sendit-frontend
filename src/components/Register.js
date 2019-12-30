@@ -17,7 +17,7 @@ export class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { firstName, lastName, email, phoneNo, password } = this.state;
-    fetch("http://localhost:5000/api/v1/users", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/users", {
       method: "POST",
       headers: {
         "Content-type": "Application/json"

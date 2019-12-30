@@ -25,7 +25,7 @@ export class CreateOrder extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { pickupLocation, destination, recipientNo, recipientName } = this.state;
-    fetch("http://localhost:5000/api/v1/parcels", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels", {
       method: "POST",
       headers: {
         Authorization:token,

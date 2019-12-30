@@ -34,14 +34,20 @@ nav ul a:hover {
   width: 100%;
   background-color: black;
   opacity: 0.8;
-
 }
 
-
+.space-top{
+  position: relative;
+  top: 66px;
+}
 .carousel-text{
   position: absolute;
   top: 50%;
   font-size: 30px;
+}
+
+.carousel-item img{
+  object-fit: cover;
 }
 
 .copyright{
@@ -53,7 +59,6 @@ nav ul a:hover {
 
 img{
   height: 80vh;
-  
 }
 
 

@@ -7,6 +7,8 @@
      background-color:black;
      opacity: 0.9;
      color: white;
+     position: relative;
+     top: 66px;
   }
 
   

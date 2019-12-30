@@ -23,7 +23,7 @@ export class Login extends Component {
   handleSubmit = e => {
     const { email, password } = this.state;
     e.preventDefault();
-    fetch("http://localhost:5000/api/v1/users/login", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/users/login", {
       method: "POST",
       headers: {
         "Content-type": "Application/json"

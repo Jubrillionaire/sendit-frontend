@@ -11,7 +11,7 @@ export class Profile extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:5000/api/v1/users/${userId}/parcels`, {
+    fetch(`https://sendit-backend01.herokuapp.com/api/v1/users/${userId}/parcels`, {
       headers: {
         "Content-type": "Application/json",
         Authorization: token
@@ -28,7 +28,7 @@ export class Profile extends Component {
   handleEdit = id => {
     const answer = window.prompt("Please Input A Preferred Destination");
 
-    fetch("http://localhost:5000/api/v1/parcels/destination", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/destination", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
@@ -51,7 +51,7 @@ export class Profile extends Component {
 
   handleCancel = id => {
     if (window.confirm("are you sure you want to delete this parcel?")) {
-      fetch("http://localhost:5000/api/v1/parcels/cancel", {
+      fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/cancel", {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
