@@ -38,7 +38,7 @@ export class Register extends Component {
           window.location = "/user";
           toast.success(res.msg);
         } else if (res.msg) {
-          toast.error(res.msg);
+          toast.error("email exists! please enter a new one");
 
           console.log(res.msg);
         } else {
