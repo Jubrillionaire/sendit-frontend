@@ -139,9 +139,10 @@ export class Profile extends Component {
             <td>{data.recipient_phone_no}</td>
             <td>{data.status}</td>
             <button
+            disabled={data.status === "cancelled" ? true : false }
               onClick={() => this.handleCancel(data.id)}
               className="btn btn-danger p-1 pri">
-              <FaTrashAlt disabled={data.status === "cancelled" ? true : false }/>
+              <FaTrashAlt />
             </button>
           </tr>
         </tbody>
