@@ -74,7 +74,7 @@ export class Profile extends Component {
 
   handleCancel = id => {
     if (window.confirm("are you sure you want to delete this parcel?")) {
-      fetch("http://sendit-backend01.herokuapp.com/api/v1/parcels/cancel", {
+      fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/cancel", {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
