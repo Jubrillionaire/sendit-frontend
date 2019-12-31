@@ -23,14 +23,6 @@ function Footer() {
         <div>Weekends: 10am - 4pm</div>
       </div>
 
-      <div>
-        <h3>More Info</h3>
-        <div>Careers</div>
-        <div>Help Center</div>
-        <div>Terms&Conditions</div> 
-        <div>Privacy Policy</div> 
-      </div>
-      {/* <div className="copyright"> Developed by: Jubril ©2019</div> */}
     </div>
     </>
   );

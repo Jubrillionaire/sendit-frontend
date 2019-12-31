@@ -114,7 +114,7 @@ export class Profile extends Component {
       return (
         <tbody key={data.id}>
           <tr>
-       <span>   <button onClick={this.openModal}>Edit Destination</button>
+       <span>   <button onClick={this.openModal} disabled={data.status === "cancelled" ? true : false } >Edit Destination</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
