@@ -64,6 +64,7 @@ export class CreateOrder extends Component {
             name="pickupLocation"
             placeholder="Pickup Location"
             onChange={this.handleChange}
+            required={true}
           />
         </FormGroup>
 
@@ -74,6 +75,7 @@ export class CreateOrder extends Component {
             name="destination"
             placeholder="Destination"
             onChange={this.handleChange}
+            required={true}
           />
         </FormGroup>
 
@@ -84,6 +86,7 @@ export class CreateOrder extends Component {
             name="recipientName"
             placeholder="Recipient's name"
             onChange={this.handleChange}
+            required={true}
           />
         </FormGroup>
 
@@ -94,6 +97,7 @@ export class CreateOrder extends Component {
             name="recipientNo"
             placeholder="Recipient's Mobile-No"
             onChange={this.handleChange}
+            required={true}
           />
         </FormGroup>
         <input type="submit" value="create" />

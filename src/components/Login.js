@@ -59,6 +59,7 @@ export class Login extends Component {
             name="email"
             placeholder="email"
             onChange={this.handleChange}
+            required={true}
           />
         </FormGroup>
 
@@ -69,6 +70,7 @@ export class Login extends Component {
             name="password"
             placeholder="Password"
             onChange={this.handleChange}
+            required={true}
           />
         </FormGroup>
 

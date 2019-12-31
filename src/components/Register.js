@@ -67,6 +67,7 @@ export class Register extends Component {
               name="firstName"
               placeholder="First Name"
               onChange={this.handleChange}
+              required={true}
             />
           </FormGroup>
 
@@ -77,6 +78,7 @@ export class Register extends Component {
               name="lastName"
               placeholder="Last Name"
               onChange={this.handleChange}
+              required={true}
             />
           </FormGroup>
 
@@ -87,6 +89,7 @@ export class Register extends Component {
               name="email"
               placeholder="email"
               onChange={this.handleChange}
+              required={true}
             />
           </FormGroup>
 
@@ -97,6 +100,7 @@ export class Register extends Component {
               name="phoneNo"
               placeholder="Mobile-No"
               onChange={this.handleChange}
+              required={true}
             />
           </FormGroup>
 
@@ -107,6 +111,7 @@ export class Register extends Component {
               name="password"
               placeholder="Password"
               onChange={this.handleChange}
+              required={true}
             />
           </FormGroup>
 

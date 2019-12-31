@@ -2,13 +2,34 @@ import React, { Component } from "react";
 import "../styles/profile.css";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import Modal from 'react-modal';
 const userId = localStorage.getItem("userId");
 const token = localStorage.getItem("token");
 
 export class Profile extends Component {
   state = {
-    profile: []
+    profile: [],
+     modalIsOpen: false,
+     destination: ""
   };
+
+  handleChange = (e) => {
+      this.setState({
+        destination: e.target.value
+      })
+  }
+  
+  openModal = () => {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal = () => {
+    this.subtitle.style.color = '#f00';
+  }
+ 
+  closeModal =() => {
+    this.setState({modalIsOpen: false});
+  }
 
   componentDidMount() {
     fetch(`https://sendit-backend01.herokuapp.com/api/v1/users/${userId}/parcels`, {
@@ -26,8 +47,10 @@ export class Profile extends Component {
   }
 
   handleEdit = id => {
-    const answer = window.prompt("Please Input A Preferred Destination");
 
+    // const answer = window.prompt("Please Input A Preferred Destination");
+    const {destination} = this.state
+    console.log(destination)
     fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/destination", {
       method: "PATCH",
       headers: {
@@ -37,7 +60,7 @@ export class Profile extends Component {
       body: JSON.stringify({
         parcelId: id,
         user_id: userId,
-        destination: answer
+        destination: destination
       })
     })
       .then(res => res.json())
@@ -51,7 +74,7 @@ export class Profile extends Component {
 
   handleCancel = id => {
     if (window.confirm("are you sure you want to delete this parcel?")) {
-      fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/cancel", {
+      fetch("http://sendit-backend01.herokuapp.com/api/v1/parcels/cancel", {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",
@@ -69,25 +92,46 @@ export class Profile extends Component {
             toast.success(data.msg);
           }
         })
-        .cstch(err => console.log(err));
+        .catch(err => console.log(err));
     } else {
       window.location = "/user";
     }
   };
 
   render() {
+    const customStyles = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
+    };
     const { profile } = this.state;
     const table = profile.map(data => {
       return (
         <tbody key={data.id}>
           <tr>
-            <button
-              onClick={() => this.handleEdit(data.id)}
-              className="btn btn-secondary p-1 pl-2 sec"
-              disabled={data.status === "cancelled" ? true : false}
-            >
-              <FaEdit />
-            </button>
+       <span>   <button onClick={this.openModal}>Edit Destination</button>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+ 
+          <h2 ref={subtitle => this.subtitle = subtitle}>Please enter A preferred destination</h2>
+          <div>I am a modal</div>
+          <form  onSubmit={() => this.handleEdit(data.id)}>
+          <button onClick={this.closeModal}>close</button>
+            <input type="text" value={this.state.destination} onChange={this.handleChange} />
+            <button>submit</button>
+          </form>
+        </Modal> </span>
+
             <th scope="row">{data.id}</th>
             <td>{data.pickup_location}</td>
             <td>{data.destination}</td>
