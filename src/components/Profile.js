@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/profile.css";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt} from "react-icons/fa";
 import { toast } from "react-toastify";
 import Modal from 'react-modal';
 const userId = localStorage.getItem("userId");
@@ -124,7 +124,6 @@ export class Profile extends Component {
         >
  
           <h2 ref={subtitle => this.subtitle = subtitle}>Please enter A preferred destination</h2>
-          <div>I am a modal</div>
           <form  onSubmit={() => this.handleEdit(data.id)}>
           <button onClick={this.closeModal}>close</button>
             <input type="text" value={this.state.destination} onChange={this.handleChange} />
