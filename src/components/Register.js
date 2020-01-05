@@ -46,7 +46,7 @@ export class Register extends Component {
               localStorage.setItem("token", res.token);
               localStorage.setItem("userId", res.userId);
               localStorage.setItem("role", data.role);
-              {role === "member" ? (window.location = "/user") : (window.location = "/parcels")}
+              {role === "member" ? (window.location = "/user") : (window.location = "/parcels")};
               toast.success(res.msg);
             });
         } else if (res.msg) {
