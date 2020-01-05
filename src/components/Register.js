@@ -17,7 +17,7 @@ export class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { firstName, lastName, email, phoneNo, password } = this.state;
-    fetch("https://sendit-backend01.heroku.com/api/v1/users", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/users", {
       method: "POST",
       headers: {
         "Content-type": "Application/json"
@@ -33,7 +33,7 @@ export class Register extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.token) {
-          fetch("https://sendit-backend01.heroku.com/api/v1/me", {
+          fetch("https://sendit-backend01.herokuapp.com/api/v1/me", {
             header: {
               "Content-type": "application/json",
               Authorization: res.token

@@ -25,7 +25,7 @@ export class Login extends Component {
   handleSubmit = e => {
     const { email, password } = this.state;
     e.preventDefault();
-    fetch("https://sendit-backend01.heroku.com/api/v1/users/login", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/users/login", {
       method: "POST",
       headers: {
         "Content-type": "Application/json"
@@ -38,7 +38,7 @@ export class Login extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.token) {
-          fetch("https://sendit-backend01.heroku.com/api/v1/me", {
+          fetch("https://sendit-backend01.herokuapp.com/api/v1/me", {
             headers: {
               "Content-type": "application/json",
               Authorization: res.token
