@@ -4,7 +4,7 @@ import { FaTrashAlt} from "react-icons/fa";
 import { toast } from "react-toastify";
 import Modal from 'react-modal';
 const userId = localStorage.getItem("userId");
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("token")
 
 export class Profile extends Component {
   state = {
@@ -12,6 +12,8 @@ export class Profile extends Component {
      modalIsOpen: false,
      destination: ""
   };
+
+  
 
   handleChange = (e) => {
       this.setState({
@@ -32,7 +34,7 @@ export class Profile extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://sendit-backend01.herokuapp.com/api/v1/users/${userId}/parcels`, {
+    fetch(`http://localhost:4000/api/v1/users/${userId}/parcels`, {
       headers: {
         "Content-type": "Application/json",
         Authorization: token
@@ -51,7 +53,7 @@ export class Profile extends Component {
     // const answer = window.prompt("Please Input A Preferred Destination");
     const {destination} = this.state
     console.log(destination)
-    fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/destination", {
+    fetch("http://localhost:4000/api/v1/parcels/destination", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
@@ -74,7 +76,7 @@ export class Profile extends Component {
 
   handleCancel = id => {
     if (window.confirm("are you sure you want to delete this parcel?")) {
-      fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/cancel", {
+      fetch("http://localhost:4000/api/v1/parcels/cancel", {
         method: "PATCH",
         headers: {
           "Content-type": "application/json",

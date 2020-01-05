@@ -7,11 +7,13 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import CreateOrder from "./components/CreateOrder";
+import AdminParcels from './components/AdminParcels';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Route, Redirect } from "react-router-dom";
 
 const token = localStorage.getItem("token");
+const role = localStorage.getItem("role")
 
 export class App extends Component {
   state = {
@@ -19,7 +21,7 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    fetch("https://sendit-backend01.herokuapp.com/api/v1/me", {
+    fetch("http://localhost:4000/api/v1/me", {
       headers: {
         "Content-type": "application/json",
         Authorization: token
@@ -52,12 +54,23 @@ export class App extends Component {
                 return <Redirect to="/user" />;
               }}
             />
+           {/* <Route path="/parcels" component={AdminParcels} /> */}
+             
+           <Route
+              path="/parcels"
+              render={() => {
+                if (role === "admin") return <AdminParcels />;
+                return <Redirect to="/user" />;
+              }}
+            />
+            
+
             <Route
               exact
               path="/login"
               render={() => {
                 if (!token) return <Login />;
-                return <Redirect to="/user" />;
+                return <Redirect to="/" />;
               }}
             />
 
@@ -65,7 +78,7 @@ export class App extends Component {
               exact
               path="/user"
               render={() => {
-                if (token) return <Profile />;
+                if (role === "member") return <Profile />;
                 return <Redirect to="/login" />;
               }}
             />

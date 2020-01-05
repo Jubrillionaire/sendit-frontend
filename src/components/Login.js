@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import '../styles/login.css'
 toast.configure();
 
+const role = localStorage.getItem("role")
+
 export class Login extends Component {
   state = {
     email: "",
@@ -23,7 +25,7 @@ export class Login extends Component {
   handleSubmit = e => {
     const { email, password } = this.state;
     e.preventDefault();
-    fetch("https://sendit-backend01.herokuapp.com/api/v1/users/login", {
+    fetch("http://localhost:4000/api/v1/users/login", {
       method: "POST",
       headers: {
         "Content-type": "Application/json"
@@ -34,15 +36,26 @@ export class Login extends Component {
       })
     })
       .then(res => res.json())
-      .then(data => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userId", data.userId);
-          console.log(data.userId)
-          window.location = "/user";
-          toast.success(data.msg);
-        } else if (data.msg) {
-          toast.error(data.msg);
+      .then(res => {
+        if (res.token) {
+          fetch("http://localhost:4000/api/v1/me", {
+            headers: {
+              "Content-type": "application/json",
+              Authorization: res.token
+            }
+            })
+            .then(res => res.json())
+            .then(data => {
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("userId", res.userId);
+          localStorage.setItem("role", data.role);
+          console.log(data.role)
+          {role === "member" ? (window.location = "/user") : (window.location = "/parcels")}
+          toast.success(data.msg)
+         })
+
+        } else if (res.msg) {
+          toast.error(res.msg);
         }
       })
       .catch(err => console.log(err));

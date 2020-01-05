@@ -17,7 +17,7 @@ export class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { firstName, lastName, email, phoneNo, password } = this.state;
-    fetch("https://sendit-backend01.herokuapp.com/api/v1/users", {
+    fetch("http://localhost:4000/api/v1/users", {
       method: "POST",
       headers: {
         "Content-type": "Application/json"
@@ -33,10 +33,20 @@ export class Register extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.token) {
-          localStorage.setItem("token", res.token);
-          localStorage.setItem('userId', res.userId);
-          window.location = "/user";
-          toast.success(res.msg);
+          fetch("http://localhost:4000/api/v1/me", {
+            header: {
+              "Content-type": "application/json",
+              Authorization: res.token
+            }
+          })
+            .then(res => res.json())
+            .then(data => {
+              localStorage.setItem("token", res.token);
+              localStorage.setItem("userId", res.userId);
+              localStorage.setItem("role", data.role);
+              window.location = "/user";
+              toast.success(res.msg);
+            });
         } else if (res.msg) {
           toast.error("email exists! please enter a new one");
 
@@ -58,66 +68,65 @@ export class Register extends Component {
 
   render() {
     return (
-        <Form className="input" onSubmit={this.handleSubmit}>
-          <h1 className="register">Register</h1>
-          <FormGroup>
-            <Label for="firstName">First Name</Label>
-            <Input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              onChange={this.handleChange}
-              required={true}
-            />
-          </FormGroup>
+      <Form className="input" onSubmit={this.handleSubmit}>
+        <h1 className="register">Register</h1>
+        <FormGroup>
+          <Label for="firstName">First Name</Label>
+          <Input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            onChange={this.handleChange}
+            required={true}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <Label for="lastName">Last Name</Label>
-            <Input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              onChange={this.handleChange}
-              required={true}
-            />
-          </FormGroup>
+        <FormGroup>
+          <Label for="lastName">Last Name</Label>
+          <Input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            onChange={this.handleChange}
+            required={true}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              placeholder="email"
-              onChange={this.handleChange}
-              required={true}
-            />
-          </FormGroup>
+        <FormGroup>
+          <Label for="email">Email</Label>
+          <Input
+            type="email"
+            name="email"
+            placeholder="email"
+            onChange={this.handleChange}
+            required={true}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <Label for="mobile-no">Mobile-No</Label>
-            <Input
-              type="text"
-              name="phoneNo"
-              placeholder="Mobile-No"
-              onChange={this.handleChange}
-              required={true}
-            />
-          </FormGroup>
+        <FormGroup>
+          <Label for="mobile-no">Mobile-No</Label>
+          <Input
+            type="text"
+            name="phoneNo"
+            placeholder="Mobile-No"
+            onChange={this.handleChange}
+            required={true}
+          />
+        </FormGroup>
 
-          <FormGroup>
-            <Label for="password">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={this.handleChange}
-              required={true}
-            />
-          </FormGroup>
+        <FormGroup>
+          <Label for="password">Password</Label>
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={this.handleChange}
+            required={true}
+          />
+        </FormGroup>
 
-          <input type="submit" value="submit" />
-        </Form>
-      
+        <input type="submit" value="submit" />
+      </Form>
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Logo from '../images/parcel.png'
 import {NavLink, Link} from 'react-router-dom'
 const token = localStorage.getItem("token")
-
+const role = localStorage.getItem("role")
 
 
 export class NavBar extends Component {
@@ -37,7 +37,7 @@ export class NavBar extends Component {
       <li> <NavLink to="/login" className="nav-item nav-link text-white" >Login</NavLink></li>
       </ul>)}
         
-     {token && (
+     {(token && role === "member")  && (
         <ul className="navbar-nav">
         <li> <NavLink to="#" className="nav-item nav-link text-white" >{this.props.firstName} </NavLink></li>
          <li> <NavLink to="/user" className="nav-item nav-link text-white" >DashBoard</NavLink></li>
@@ -45,6 +45,12 @@ export class NavBar extends Component {
       <li> <NavLink to="/" className="nav-item nav-link text-white" onClick ={this.handleLogout} >Logout</NavLink></li>
       </ul>)}
    
+   {(token && role === "admin") && ( <ul className="navbar-nav">
+        <li> <NavLink to="#" className="nav-item nav-link text-white" >{this.props.firstName} </NavLink></li>
+       <li> <NavLink to="/parcels" className="nav-item nav-link text-white" >All-orders</NavLink></li>
+       <li> <NavLink to="/" className="nav-item nav-link text-white" onClick ={this.handleLogout} >Logout</NavLink></li>
+      </ul>) }
+
  </div>
 </nav>
             </div>
