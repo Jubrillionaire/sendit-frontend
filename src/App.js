@@ -21,7 +21,7 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:4000/api/v1/me", {
+    fetch("https://sendit-backend01.heroku.com/api/v1/me", {
       headers: {
         "Content-type": "application/json",
         Authorization: token
