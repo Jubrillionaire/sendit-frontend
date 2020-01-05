@@ -50,8 +50,8 @@ export class Login extends Component {
           localStorage.setItem("userId", res.userId);
           localStorage.setItem("role", data.role);
           console.log(data.role)
-          {role === "member" && (window.location = "/user")}
-          {role === "admin" && (window.location = "/parcels")}
+          {data.role === "member" && (window.location = "/user")}
+          {data.role === "admin" && (window.location = "/parcels")}
           toast.success(data.msg)
          })
 
