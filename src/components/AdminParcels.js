@@ -38,7 +38,7 @@ export class Profile extends Component {
   };
 
   componentDidMount() {
-    fetch(`https://sendit-backend01.herokuapp.comd.heroku.com/api/v1/parcels`, {
+    fetch(`https://sendit-backend01.herokuapp.com/api/v1/parcels`, {
       headers: {
         "Content-type": "Application/json",
         Authorization: token
@@ -54,7 +54,7 @@ export class Profile extends Component {
 
   handleStatus = id => {
     const { status } = this.state;
-    fetch("https://sendit-backend01.herokuapp.comd.heroku.com/api/v1/parcels/status", {
+    fetch("https://sendit-backend01.herokuapp.com/api/v1/parcels/status", {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
