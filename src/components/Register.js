@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
+const role = localStorage.getItem("role")
+
 export class Register extends Component {
   state = {
     firstName: "",
@@ -44,7 +46,7 @@ export class Register extends Component {
               localStorage.setItem("token", res.token);
               localStorage.setItem("userId", res.userId);
               localStorage.setItem("role", data.role);
-              window.location = "/user";
+              {role === "member" ? (window.location = "/user") : (window.location = "/parcels")}
               toast.success(res.msg);
             });
         } else if (res.msg) {
